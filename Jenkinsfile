@@ -1,4 +1,5 @@
 
+
 pipeline {
     agent any
 
@@ -46,9 +47,10 @@ pipeline {
                 echo 'Deploying application artifact...'
                 sh '''
                     echo "Copying JAR to deployment location..."
-                    cp target/*.jar /tmp/deployed-app.jar
+                    cp target/*.jar deployed-app.jar
                     echo "Deployment completed successfully."
                 '''
+                archiveArtifacts artifacts: 'deployed-app.jar', fingerprint: true
             }
         }
     }
@@ -62,3 +64,4 @@ pipeline {
         }
     }
 }
+
